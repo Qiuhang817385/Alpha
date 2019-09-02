@@ -6,6 +6,59 @@
     <title>Document</title>
 </head>
 <body>
-    
+    <script>
+        /*  Input: "LVIII"
+        Output: 58
+        Explanation: L = 50, V= 5, III = 3. */
+        // 如果I的下一个字符是V (5) and X,那么就变成组合的字符串
+        /* 
+        首先将所有的组合可能性列出并添加到哈希表中
+        然后对字符串进行遍历，由于组合只有两种，一种是 1 个字符，一种是 2 个字符，其中 2 个字符优先于 1 个字符
+        先判断两个字符的组合在哈希表中是否存在，存在则将值取出加到结果 ans 中，并向后移2个字符。不存在则将判断当前 1 个字符是否存在，存在则将值取出加到结果 ans 中，并向后移 1 个字符
+        遍历结束返回结果 ans
+
+
+        */
+        function conver(str){
+            const map = {
+                I:1,
+                V:5,
+                X:10,
+                L:50,
+                C:100,
+                D:500,
+                M:1000,
+                IV:4,
+                IX:9,
+                XL:40,
+                XC:90,
+                CD:400,
+                CM:900,
+            }
+
+            
+            // let arr = str.split('');
+            let arr = str;
+            // console.log(arr[0]);
+            let count = 0 ;
+            for (let index = 0; index < arr.length; ) {
+                // const element = array[index];
+               if(index+1<arr.length&&map[arr.substr(index,2)]){
+                   count += map[arr.substr(index,2)];
+                   index += 2;
+               }else{
+                   count += map[arr.substr(index,1)];
+                   index++;
+               }
+                
+            }    
+            return count;        
+        }
+
+       console.log( conver('IX'));
+
+
+
+    </script>
 </body>
 </html>
