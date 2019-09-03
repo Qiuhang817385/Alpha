@@ -1,0 +1,115 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 单一类型的括号()
+        // ()[]{}
+        // true
+        const { log } = console;
+        /*var isValid = function(s) {
+            let array = s.split('');
+            let left = 0;
+            // log(array);
+            for (let index = 0; index < array.length; index++) {
+                if(array[index]==='('){
+                    left++;
+                }
+                if(array[index]===')'){
+                    if(left===0){
+                        return false;
+                    }else{
+                        left--;
+                    }
+                }
+            }
+            if(left===0){
+                return true;
+            }else{
+                return false;
+            }
+        }; */
+        // log(    isValid('()(())()()((()))')    );
+
+// {[]}
+        var isValid = function (s) {
+            let array = s.split('');
+            let stack = [];
+            let left = 0;
+
+            for (let index = 0; index < array.length; index++) {
+                if (array[index] === '(' || array[index] === '{' || array[index] === '[') {
+                    stack.push(array[index]);
+
+                }
+                // 
+                // || array[index] === '}' || array[index] === ']'
+                if (array[index] === ')' ) {
+                    if(stack.length===0){
+                        return false;
+                    }
+                    if(stack[stack.length-1]==='('){
+
+                        stack.pop(stack[stack.length-1]);
+                    }else{
+                        return false;
+                    }
+                }else if(array[index] === '}'){
+                    if(stack.length===0){
+                        return false;
+                    }
+                    if(stack[stack.length-1]==='{'){
+
+                        stack.pop(stack[stack.length-1]);
+                    }else{
+                        return false;
+                    }
+                }else if(array[index] === ']'){
+                    if(stack.length===0){
+                        return false;
+                    }
+                    if(stack[stack.length-1]==='['){
+                        stack.pop(stack[stack.length-1]);
+                    }else{
+                        return false;
+                    }
+                    
+                }
+            }
+            if(stack.length>0){
+                return false;
+            }else{
+                return true;
+            }
+        };
+        log(    isValid('(])')    );
+        // "(])"
+        /* var isValid = function (s) {
+            var map = {
+                "(": ")",
+                "[": "]",
+                "{": "}"
+            }
+            var leftArr = []
+            for (var ch of s) {
+                if (ch in map) leftArr.push(ch); //为左括号时，顺序保存
+                else { //为右括号时，与数组末位匹配
+                    if (ch != map[leftArr.pop()]) return false;
+                }
+            }
+            return !leftArr.length //防止全部为左括号
+        }; */
+
+
+
+
+    </script>
+</body>
+
+</html>
