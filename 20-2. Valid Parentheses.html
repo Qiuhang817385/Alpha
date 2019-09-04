@@ -1,0 +1,48 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <!--  // 执行用时 :80 ms, 在所有 JavaScript 提交中击败了65.96%的用户
+            // 内存消耗 :34.7 MB, 在所有 JavaScript 提交中击败了44.10%的用户 -->
+    <script>
+        // 单一类型的括号()
+        // ()[]{}
+        // true
+        const {log} = console;
+      
+        var isValid = function (s) {
+            var map = {
+                "(": ")",//key=(    ,   value = )
+                "[": "]",//
+                "{": "}"
+            }
+            var leftArr = [];
+            for (var ch of s) {
+                if (ch in map) {
+                    leftArr.push(ch);//为左括号时，顺序保存,只会保存key值,就是  只会进去左括号
+                }else{ //为右括号时，与数组末位匹配
+                    if (ch != map[leftArr.pop()]) 
+                    return false;
+                }              
+                // log(ch)
+            }
+            return !leftArr.length //防止全部为左括号,如果全是左括号,那么数组的length>0,那么!不为0 === false
+        };
+      
+        var leftArr2 = [];
+        log(isValid('()()[]{}'))
+        log(!leftArr2.length)
+        log(leftArr2.length)
+
+
+
+    </script>
+</body>
+
+</html>
